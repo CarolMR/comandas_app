@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
@@ -9,6 +9,39 @@
 <body>
     <h1>Rota da página Inicial da nossa WEB APP(Carolina Ramos)</h1>
     <h1>Uso de render_template</h1>
+</body>
+
+</html> -->
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>HOME</title>
+</head>
+
+<body>
+     <!-- <h1>HOME</h1>  -->
+     
+    {% extends "base.html" %}
+
+    {% block title %}{% endblock %}
+
+    {% block content %}
+    <!-- <h1>HOME</h1>
+    <p class="important">Seja bem vindo!</p>
+
+    <ul>
+        <li><a href="{{ url_for('index.formIndex') }}">Home</a></li>
+    </ul>  -->
+
+   <form action="{{ url_for('index.formIndex') }}" method="POST">
+        <h1>Home</h1>
+        <button type="submit" name="formNovo">Novo Home</button>
+    </form>  
+    {% endblock %}
+
 </body>
 
 </html>

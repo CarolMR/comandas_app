@@ -7,8 +7,56 @@
 </head>
 
 <body>
-    <h1>Rota da página de Produtos da nossa WEB APP(Carolina Ramos)</h1>
-    <h1>Uso de render_template</h1>
+    <!-- <h1>Rota da página de Produtos da nossa WEB APP(Carolina Ramos)</h1>
+    <h1>Uso de render_template</h1> -->
+{% extends "base.html" %}
+
+
+{% block title %}Produto{% endblock %}
+    
+    
+{% block content %}
+<!-- <h1>Produto</h1>
+<p class="important"></p>
+    
+<ul>
+    <li><a href="{{ url_for('index.formIndex') }}">Home</a></li>
+</ul> -->
+
+<form action="{{ url_for('produto.formProduto') }}" method="POST">
+    <h1>Produtos</h1>
+    <button type="submit" name="formNovo">Novo Produto</button>
+</form>
+
+<div class="container text-center">
+    <div class="row align-items-center">
+        <table>
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Descrição</th>
+                    <th scope="col">Foto</th>
+                    <th scope="col">Valor Unitário</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row"></th>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>
+                        <i class="fas fa-edit"></i>
+                        <i class="fas fa-trash"></i>
+                    </td>
+                </tr>>  
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
 </body>
 
 </html>

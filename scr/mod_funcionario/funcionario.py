@@ -3,9 +3,13 @@ bp_funcionario = Blueprint('funcionario', __name__, url_prefix="/funcionario", t
 
 ''' rotas dos formulários '''
 
-@bp_funcionario.route('/')
+@bp_funcionario.route('/', methods=['GET','POST'])
 def formListaFuncionario():
     return render_template('formListaFuncionario.html'), 200
+
+@bp_funcionario.route('/form-funcionario/', methods=['POST'])
+def formFuncionario():
+    return render_template('formFuncionario.html'), 200
 
 # '''
 # Rota antiga de app...
