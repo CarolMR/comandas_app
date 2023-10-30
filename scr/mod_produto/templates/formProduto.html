@@ -2,25 +2,66 @@
 
 {% block title %}Produto{% endblock %}
 
-{% block content %}
-<form name="formAdicionar" id="formAdicionar" action="" method="POST">
-      <h1>Produto</h1>
+{% block content %} 
+{% block styles %}
+<style>
+       body {
+           background-color:#f3efdb;
+       }
+       form input {
+       margin-right: 20px; 
+       }
 
-      <input type="text" name="id" id="id" value="" placeholder="Código" readonly>
-      <label for="id">Código</label>
-      <br>
-      <input type="text" name="nome" id="nome" value="" placeholder="Nome Funcionário" maxlength="100" autofocus required>
-      <label for="nome">Nome Funcionário</label>
-      <br>
-      <input type="text" name="descricao" id="descricao" value="" placeholder="Descrição" maxlength="15" required>
-      <label for="descricao">Descrição</label>
-      <br>
-      <input type="file" name="foto" id="foto" value="" placeholder="Foto" accept="image/*" maxlength="15" required>
-      <label for="foto">Foto</label>
-      <br>
-      <input type="number" name="valor_unitario" id="valor_unitario" value="" placeholder="valor_unitario" maxlength="15" required>
-      <label for="valor_unitario">Valor Unitário</label>
-      <br>
-      <button type='submit' name='salvaProdutoDB' id='salvaProdutoDB'><i class='fas fa-save'></i> Salvar</button>
-    </form>
+       h1 {
+           margin-bottom: 60px; 
+       }
+
+       .column {
+        margin-top: 85px; 
+       }
+       .input-group {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px; 
+      }
+
+      .input-group label {
+          /* margin-right: 10px;  */
+          width: 120px; 
+      }
+
+      .input-group input, .input-group select {
+          flex: 1; 
+          max-width: 300px;
+      }
+</style>       
+{% endblock %}
+
+<div>
+  <form name="formAdicionar" action="{{ url_for('produto.insert') }}" method="POST" enctype="multipart/form-data">
+    <h1 style="color: #d68741"><i class= "bi bi-arrow-return-right"></i>  Produto</h1> 
+          <label for="id_produto">• Código:</label>
+          <input style= "border-radius: 4px;" type="text" name="id" id="id" value="0" placeholder="ID" readonly>
+
+          <label for="nome">• Nome do Produto:</label>
+          <input style= "border-radius: 4px;" type="text" name="nome" id="nome" value="" placeholder="Nome do Produto" autofocus required>
+
+          <label for="valor_unitario">• Valor:</label>
+          <input style= "border-radius: 4px;" type="number" name="valor_unitario" id="valor_unitario" value="" required>
+
+          <!-- <label for="descricao" style="margin-right: 30px;">• Descrição do Produto:  </label>
+          <textarea style= "border-radius: 6px;" name="descricao" id="descricao" placeholder="Descrição do Produto" required></textarea> -->
+  </form>
+  <div class="column">
+    <div class="input-group">        
+          <label for="descricao" style="margin-bottom: 60px;">• Descrição do Produto:  </label>
+          <textarea style= "border-radius: 6px; margin-bottom: 60px;" name="descricao" id="descricao" placeholder="Descrição do Produto" required></textarea>
+    </div>
+    <div class="input-group">
+          <label for="foto">• Imagem:</label>
+          <input style= "border-radius: 4px;" type="file" name="foto" accept="image/*" id="foto">
+          <button style="background-color: #bae6c2; color: #499146; border-radius: 5px; cursor: pointer; padding: 5px 10px; margin-left: 40px;" type='submit' name='salvaProdutoDB' id='salvaProdutoDB'><i class='fas fa-save'></i> Salvar</button>
+    </div>
+ </div>
+</div>
 {% endblock %}

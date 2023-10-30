@@ -4,59 +4,92 @@
 <head>
     <meta charset="UTF-8">
     <title>Produtos</title>
+    <style>
+        .table-header {
+            background-color: #d68741; 
+        }
+        .form-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+        }
+        .form-produto {
+            text-align: left;
+        }
+        .form-title {
+            text-align: left;
+        }
+        .form-novo-produto {
+            text-align: center;
+            margin-top: 10px;   
+        }
+    </style>
 </head>
 
-<body>
-    <!-- <h1>Rota da página de Produtos da nossa WEB APP(Carolina Ramos)</h1>
-    <h1>Uso de render_template</h1> -->
-{% extends "base.html" %}
-
-
-{% block title %}Produto{% endblock %}
+<body style="background-color: #f3efdb;">
+    {{ result }}
+    {% extends "base.html" %}
     
-    
-{% block content %}
-<!-- <h1>Produto</h1>
-<p class="important"></p>
-    
-<ul>
-    <li><a href="{{ url_for('index.formIndex') }}">Home</a></li>
-</ul> -->
 
-<form action="{{ url_for('produto.formProduto') }}" method="POST">
-    <h1>Produtos</h1>
-    <button type="submit" name="formNovo">Novo Produto</button>
-</form>
-
-<div class="container text-center">
-    <div class="row align-items-center">
-        <table>
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Descrição</th>
-                    <th scope="col">Foto</th>
-                    <th scope="col">Valor Unitário</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row"></th>
-                    <td>...</td>
-                    <td>...</td>
-                    <td>...</td>
-                    <td>...</td>
-                    <td>
-                        <i class="fas fa-edit"></i>
-                        <i class="fas fa-trash"></i>
-                    </td>
-                </tr>>  
-            </tbody>
-        </table>
+    {% block title %}Produto{% endblock %}
+   
+    
+    {% block content %}
+    <div class="form-container">
+        <form class="form-title" action="{{ url_for('produto.formProduto') }}" method="POST">
+            <h1 style="color: #d68741"><i class="bi bi-arrow-right-short"></i>Produtos</h1>
+        </form>
+    
+        <form class="form-produto" action="{{ url_for('produto.formProduto') }}" method="POST">
+            <button class="bi bi-cart-plus" style="background-color: #b7e6bf; color: #499146; font-size: 18px; padding: 10px 20px; border: 3px solid #5aa358; border-radius: 5px; cursor: pointer;" class="form-novo-produto" type="submit" name="formNovo">  Novo Produto</button>
+        </form>
     </div>
-</div>
-{% endblock %}
+    
+    <div class="container text-center">
+        <div class="row align-items-center">
+            <table>
+                <thead class="table-header">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Descrição</th>
+                        <th scope="col">Foto</th>
+                        <th scope="col">Valor Unitário</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row"></th>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>
+                            <i class="fas fa-edit"></i>
+                            <i class="fas fa-trash"></i>
+                        </td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    {% if result %}
+                    {% for row in result %}
+                    <tr>
+                        <th scope="row"> {{ row['id_produto'] }}</th>
+                        <td> {{ row['nome'] }}</td>
+                        <td> {{ row['descricao'] }}</td>
+                        <td> {{ row['Foto'] }}</td>
+                        <td> {{ row['valor unitario'] }}</td>
+                        <td><i class="fas fa-edit"></i></td>
+                        <td><i class="fas fa-trash"></i></td>
+                    </tr>
+                    {% endfor %}
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endblock %}
 </body>
 
 </html>

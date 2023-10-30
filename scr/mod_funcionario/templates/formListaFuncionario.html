@@ -4,23 +4,55 @@
 <head>
     <meta charset="UTF-8">
     <title>Funcionários</title>
+    <style>
+        .table-header {
+            background-color: #d68741; 
+        }
+        .form-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 23px;
+        }
+        .form-funcionario {
+            text-align: left;
+        }
+
+        .form-title {
+            text-align: left;
+        }
+
+        .form-novo-funcionario {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+    </style>
 </head>
 
-<body>
+<body style="background-color: #f3efdb;">
+    {{ result }}
     {% extends "base.html" %}
 
     {% block title %}Funcionário{% endblock %}
 
     {% block content %}
-    <form action="{{ url_for('funcionario.formFuncionario') }}" method="POST">
-        <h1>Funcionários</h1>
-        <button type="submit" name="formNovo">Novo Funcionário</button>
+    
+ <div class="form-container">
+    <form class="form-title" action="{{ url_for('funcionario.formFuncionario') }}" method="POST">
+        <h1 style="color: #d68741"><i class="bi bi-arrow-right-short"></i>Funcionários</h1>
+        <!-- <button type="submit" name="formNovo">Novo Funcionário</button> -->
     </form>
+
+    <form class="form-funcionario" action="{{ url_for('funcionario.formFuncionario') }}" method="POST">
+        <button class="bi bi-person-plus" style="background-color: #b7e6bf; color: #499146; font-size: 18px; padding: 10px 20px; border: 3px solid #5aa358; border-radius: 5px; cursor: pointer;" class="form-novo-funcionario" type="submit" name="formNovo">  Novo Funcionário</button>
+    </form>
+ </div>
 
     <div class="container text-center">
         <div class="row align-items-center">
             <table>
-                <thead>
+                <thead class="table-header"> 
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Nome</th>
@@ -44,11 +76,24 @@
                             <i class="fas fa-edit"></i>
                             <i class="fas fa-trash"></i>
                         </td>
+                    </tr>    
+                </tbody>
+                <tbody>
+                    {% if result %}
+                    {% for row in result %}
+                    <tr>
+                        <th scope="row"> {{ row['id_funcionario'] }}</th>
+                        <td> {{ row['nome'] }}</td>
+                        <td> {{ row['matricula'] }}</td>
+                        <td> {{ row['cpf'] }}</td>
+                        <td> {{ row['telefone'] }}</td>
+                        <td> {{ row['grupo'] }}</td>
+                        <td> {{ row['senha'] }}</td>
+                        <td><i class="fas fa-edit"></i></td>
+                        <td><i class="fas fa-trash"></i></td>
                     </tr>
-                            <i class="fas fa-edit"></i>
-                            <i class="fas fa-trash"></i>
-                        </td>
-                    </tr>
+                    {% endfor %}
+                    {% endif %}
                 </tbody>
             </table>
         </div>

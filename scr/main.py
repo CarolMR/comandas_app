@@ -1,5 +1,5 @@
-from flask import Flask, render_template
-from settings import HOST, PORT, DEBUG
+from flask import Flask
+
 
 # import blueprint criado
 from mod_index.index import bp_index

@@ -6,17 +6,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %} - AbcBolinhas</title>
+    
 
     {% block style %}{% endblock %}
-    <style>
-        .important {
-            color: #6495ED;
-        }
-    </style>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.3.2-dist/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='fontawesome-free-6.4.2-web/css/all.min.css') }}">
 
+    {% if request.args.get('msg'): %}
+    <h3>{{ request.args.get('msg') }}</h3>
+    <br>
+    {% elif msg: %}
+    <h3>{{ msg }}</h3>
+    <br>
+    {% elif request.args.get('msgErro'): %}
+    <h3>{{ request.args.get('msgErro') }}</h3>
+    <br>
+    {% elif msgErro: %}
+    <h3>{{ msgErro }}</h3>
+    <br>
+    {% endif %}
+
+  
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='fontawesome-free-6.4.2-web/css/all.min.css') }}">
+    
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon-32x32.png') }}">
 
     <!-- <link rel="stylesheet" href="{{ url_for('static', filename='seuArquivo.css') }}">   11 do 20 
@@ -32,37 +44,51 @@
 
 <body>
     {% block menu %}
-        <nav class="navbar navbar-expand-lg" style="background-color: #232222f6;">
-            <div class="container-fluid">
-              <a class="navbar-brand text-white" aria-current="page" href="{{ url_for('index.formIndex') }}"><i class="fas fa-home"></i>LePasteldoZé</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link active text-white" class="navbar-brand" aria-current="page" href="{{ url_for('index.formIndex') }}"><i class="fas fa-home"></i>Home</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ url_for('funcionario.formListaFuncionario') }}"><i class="fas fa-cart-arrow-down"></i>Funcionários</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ url_for('cliente.formListaCliente') }}"><i class= i class= "fas fa-users"></i>Clientes</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ url_for('produto.formListaProduto') }}"><i class="fas fa-pizza-slice"></i>Produtos</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link text-white" aria-current="page" href="{{ url_for('index.formIndex') }}"><i class="fas fa-home"></i>Sair</a>
-                  </li>
-                </ul>
-                <form class="d-flex" role="search">
-                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                  <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-              </div>
-            </div>
-          </nav>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        Swal.fire({
+          title: 'Teste!',
+          text: 'sweetalert2 funcionando!',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
+      });
+    </script>
+    
+      <nav class="navbar navbar-expand-lg" style="background-color: #5e3929;" style="color: #f3efdb;">
+        <div class="container-fluid">
+          <a style="color: #f3efdb;" class="navbar-brand" aria-current="page" href="{{ url_for('index.formIndex') }}"><i class="fas fa-home">  ✨LePastelDoZé</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a style="color: #f3efdb;" class="nav-link active" class="navbar-brand" aria-current="page" href="{{ url_for('index.formIndex') }}"><i class="bi bi-house-door">  </i>Home</a>
+              </li>
+              <li class="nav-item">
+                <a style="color: #f3efdb;" class="nav-link" href="{{ url_for('funcionario.formListaFuncionario') }}"><i class="bi bi-person">  </i>Funcionários</a>
+              </li>
+              <li class="nav-item">
+                <a style="color: #f3efdb;" class="nav-link" href="{{ url_for('cliente.formListaCliente') }}"><i class="bi bi-people"></i>  Clientes</a>
+              </li>
+              <li class="nav-item">
+                <a style="color: #f3efdb;" class="nav-link" href="{{ url_for('produto.formListaProduto') }}"><i class="bi bi-cup-hot"></i>  Produtos</a>
+              </li>
+              <li class="nav-item">
+                <a style="color: #f3efdb;" class="nav-link" aria-current="page" href="{{ url_for('index.formIndex') }}"><i class="bi bi-door-open"></i>  Sair</a>
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit" style="background-color:#b7e6bf; color: #499146;">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+  
+      <!-- <img src="Pastel-de-Carne-Temperado2.png" alt="Imagem" style="position: absolute; top: 50%; right: 0; transform: translateY(-50%);"> -->
+
         <!-- <li><a href="{{ url_for('index.formIndex') }}"><i class="fas fa-home"></i>Home</a></li> -->
         <!-- <li><a href="{{ url_for('funcionario.formListaFuncionario') }}"><i class="fas fa-cart-arrow-down"></i>Funcionário</a></li> -->
         <!-- <li><a href="{{ url_for('cliente.formListaCliente') }}"><i class="fas fa-users"></i>Cliente</a></li> -->
@@ -82,12 +108,55 @@
 
     {% block footer %}
     <!-- &copy; Copyright 2022 by <a href="http://127.0.0.1:5000/">AbcBolinhas</a>. -->
-    <a href="{{ url_for('index.formIndex') }}">&copy; 2023 by LePasteldoZé</a>
+    <!-- <a href="{{ url_for('index.formIndex') }}">&copy; 2023 by LePasteldoZé</a> -->
+    <!-- <nav class="navbar fixed-bottom bg-body-tertiary">
+      <div class="container-fluid" style="background-color: #40230df2;">
+        <a class="navbar-brand text-white text-center" aria-current="page" href="{{ url_for('index.formIndex') }}">&copy; 2023 by LePasteldoZé</a>
+      </div>
+    </nav> -->
+    <footer style="position: absolute; bottom: 0; width: 100%; text-align: center; background-color: #5e3929; padding: 5px;">
+      <a class href="{{ url_for('index.formIndex') }}" style="color: #b7e6bf;">
+      <p>&copy; 2023 by LePasteldoZé</p>
+  </footer>
     {% endblock %}
 
     {% block js %}{% endblock %}
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.3.2-dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='fontawesome-free-6.4.2-web/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='sweetalert2/sweetalert2.min.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon-32x32.png') }}">
+    
+
+    <!-- monitorar log do navegador, pois a ordem interfere -->
+    <script src="{{ url_for('static', filename='jquery-3.7.1.js') }}"></script>
+    <script src="{{ url_for('static', filename='jquery.maskedinput.min.js') }}"></script>
     <script src="{{ url_for('static', filename='bootstrap-5.3.2-dist/js/bootstrap.min.js') }}"></script>
     <script src="{{ url_for('static', filename='fontawesome-free-6.4.2-web/js/all.js') }}"></script>
+    <script src="{{ url_for('static', filename='sweetalert2/sweetalert2.all.min.js') }}"></script>
+  
 </body>
 
 </html>
+
+    <!-- redirect - request.args.get('msg' ou 'msgErro') -->
+    {% if request.args.get('msg'): %}
+    <script>
+    Swal.fire("Sucesso", "{{ request.args.get('msg') }}", "success");
+    </script>
+    {% elif request.args.get('msgErro'): %}
+    <script>
+    Swal.fire("Erro", "{{ request.args.get('msgErro') }}", "error");
+    </script>
+    <!-- render_template - msg ou msgErro -->
+    {% elif msg: %}
+    <script>
+    Swal.fire("ID {{ msg.id }}, {{ msg.msg }} ", "{{ msg }}", "success");
+    </script>
+    {% elif msgErro: %}
+    <script>
+    Swal.fire("{{ msgErro.msg if msgErro.msg else 'Erro' }}", "{{ msgErro }}", "error");
+    </script>
+    {% endif %}
