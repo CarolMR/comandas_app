@@ -2,7 +2,14 @@
 
 {% block title %}Produto{% endblock %}
 
-{% block content %} 
+{# ajusta as variáveis conforme novo ou edit #}
+{% set id = result[0].id_produto if result else '0' %}
+{% set nome = result[0].nome if result else '' %}
+{% set descricao = result[0].descricao if result else '' %}
+{% set valor_unitario = result[0].valor_unitario if result else '' %}
+{% set foto = result[0].foto if result else '' %}
+
+{% block content %}
 {% block styles %}
 <style>
        body {
@@ -38,20 +45,22 @@
 {% endblock %}
 
 <div>
-  <form name="formAdicionar" action="{{ url_for('produto.insert') }}" method="POST" enctype="multipart/form-data">
-    <h1 style="color: #d68741"><i class= "bi bi-arrow-return-right"></i>  Produto</h1> 
+  <!-- <form name="formAdicionar" action="{{ url_for('produto.insert') }}" method="POST" enctype="multipart/form-data"> -->
+  <form name="{{ 'formEditar' if result else 'formAdicionar' }}" id="{{ 'formEditar' if result else 'formAdicionar' }}" action="{{ url_for('produto.edit') if result else url_for('produto.insert') }}" method="POST" enctype="multipart/form-data">
+
+    <h1 style="color: #d68741"><i class= "bi bi-arrow-return-right"></i>  Produto - {{ "%s: %s" % ('Editar Registro', id) if result else 'Novo' }}</h1> 
           <label for="id_produto">• Código:</label>
-          <input style= "border-radius: 4px;" type="text" name="id" id="id" value="0" placeholder="ID" readonly>
+          <input style= "border-radius: 4px;" type="text" name="id" id="id" value="{{ id }}" placeholder="ID" readonly>
 
           <label for="nome">• Nome do Produto:</label>
-          <input style= "border-radius: 4px;" type="text" name="nome" id="nome" value="" placeholder="Nome do Produto" autofocus required>
+          <input style= "border-radius: 4px;" type="text" name="nome" id="nome" value="{{ nome }}" placeholder="Nome do Produto" autofocus required>
 
           <label for="valor_unitario">• Valor:</label>
-          <input style= "border-radius: 4px;" type="number" name="valor_unitario" id="valor_unitario" value="" required>
+          <input style= "border-radius: 4px;" type="number" name="valor_unitario" id="valor_unitario" value="{{valor_unitario}}" required>  
 
           <!-- <label for="descricao" style="margin-right: 30px;">• Descrição do Produto:  </label>
           <textarea style= "border-radius: 6px;" name="descricao" id="descricao" placeholder="Descrição do Produto" required></textarea> -->
-  </form>
+  
   <div class="column">
     <div class="input-group">        
           <label for="descricao" style="margin-bottom: 60px;">• Descrição do Produto:  </label>
@@ -60,8 +69,10 @@
     <div class="input-group">
           <label for="foto">• Imagem:</label>
           <input style= "border-radius: 4px;" type="file" name="foto" accept="image/*" id="foto">
-          <button style="background-color: #bae6c2; color: #499146; border-radius: 5px; cursor: pointer; padding: 5px 10px; margin-left: 40px;" type='submit' name='salvaProdutoDB' id='salvaProdutoDB'><i class='fas fa-save'></i> Salvar</button>
+          <button style="background-color: #bae6c2; color: #499146; border-radius: 5px; cursor: pointer; padding: 5px 10px; margin-left: 40px;" type='submit' name='salvaProdutoDB' id='salvaProdutoDB'><i class="bi bi-floppy"></i> Salvar</button>
     </div>
  </div>
 </div>
+
+</form>
 {% endblock %}
