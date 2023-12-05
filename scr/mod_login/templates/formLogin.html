@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block styles %}
+
+{% endblock %}
+
+{% block menu %}
+<nav class="navbar navbar-expand-lg" style="background-color: #5e3929;" style="color: #f3efdb;">
+    <a style="color: #f3efdb;" class="navbar-brand" href="#" class="d-flex align-items-center"><i style="font-size: 24px; margin-right: 5px;">✨</i>LePastelDoZé</a>
+</nav>
+{% endblock %}
+{% block footer %}
+  
+    <footer style="position: fixed; bottom: 0; width: 100%; text-align: center; background-color: #5e3929; padding: 5px;">
+      <a class href="" style="color: #b7e6bf;">
+      <p>&copy; 2023 by LePasteldoZé</p>
+  </footer>
+    {% endblock %}
+
+    {% block js %}{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #f3efdb;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+</style>
+<div class="d-flex justify-content-center align-items-center" style="min-height: 60vh;">
+    <span class="border border-top-0 border-success" style="border-radius: 8px;">
+    <div class="bg-success p-2 text-dark bg-opacity-50 border border-secondary-subtle rounded-3 text-center">
+        <form action="{{ url_for('login.validaLogin') }}" method="post">
+            <div class="d-flex align-items-center justify-content-center">
+                <i class="bi bi-person-circle" style="font-size: 95px; color: #6f5043;"></i>
+            </div>
+            <br>
+            <i class="bi bi-person" style= "font-size: 27px; color: #6f5043;"></i>
+            <input style="border-radius: 4px; width: 300px; height: 36px; margin-bottom: 15px;" placeholder="CPF" name="usuario" type="text" value="abc">
+            <br>
+            <i class="bi bi-lock" style= "font-size: 27px; color: #6f5043;"></i>
+            <input style="border-radius: 4px; width: 300px; height: 36px; margin-bottom: 15px;" placeholder="Senha" name="senha" type="password" value="Bolinhas">
+            <br><br>
+            <input style="border-radius: 4px; width: 343px; height: 41px; margin-bottom: 18px; font-size: 17px; background-color: #f5d5b9; color: #d28039; cursor: pointer; padding: 5px 10px;" type="submit" value="Login">
+        </form>
+    </div>
+    </span>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      Swal.fire({
+        title: 'Erro',
+        text: 'Usuário não logado!',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+    });
+  </script>
+{% endblock %}  
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.6/dist/sweetalert2.all.min.js"></script>
+
+
+<!-- margin-left: 32px; -->

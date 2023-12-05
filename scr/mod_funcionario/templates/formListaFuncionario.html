@@ -7,6 +7,7 @@
     <style>
         .table-header {
             background-color: #d68741; 
+            
         }
         .form-container {
             display: flex;
@@ -26,12 +27,17 @@
             text-align: center;
             margin-top: 20px;
         }
+        .form-pdf{
+            text-align: right;
+            margin-top: 5px; 
+        }
+       
         
     </style>
     
 </head>
 
-<body style="background-color: #f3efdb;">
+<body style="background-color:  #f3efdb;">
     
     {% extends "base.html" %}
 
@@ -48,7 +54,11 @@
     <form class="form-funcionario" action="{{ url_for('funcionario.formFuncionario') }}" method="POST">
         <button class="bi bi-person-plus" style="background-color: #b7e6bf; color: #499146; font-size: 18px; padding: 10px 20px; border: 3px solid #5aa358; border-radius: 5px; cursor: pointer;" class="form-novo-funcionario" type="submit" name="formNovo">  Novo Funcionário</button>
     </form>
- </div>
+ </div> 
+    <form action="{{ url_for('funcionario.pdfTodos') }}" method="POST" class="form-pdf">
+        <button target="_blank" href="{{ url_for('funcionario.pdfTodos') }}" class="bi bi-filetype-pdf" style="background-color:#b7e6bf; color: #499146; font-size: 16px; padding: 10px 20px; border: 3px solid #5aa358; border-radius: 5px; cursor: pointer;">PDF</button>
+    </form>
+ 
 
     <div class="container text-center">
         <div class="row align-items-center">
@@ -64,7 +74,7 @@
                         <th scope="col">Senha</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="table-group-divider">
                     <tr>
                         <th scope="row"></th>
                         <td>...</td>
@@ -103,7 +113,7 @@
                         <td>
                             <form method='POST' name='jsDelete' id='jsDelete'>
                                 <input type='hidden' name='id_funcionario' value="{{ row['id_funcionario'] }}">
-                                <button type='submit' name='formDeleteFuncionario' class='btn'><i class="bi bi-trash" style="color:#5e3929;"></i></button>
+                                <button type='submit' name='formDeleteFuncionario' class='btn'><i class="bi bi-trash" style="font-size: 20px; color:#5e3929;"></i></button>
                             </form>
                         </td>
                     </tr>

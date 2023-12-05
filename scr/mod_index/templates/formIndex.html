@@ -24,6 +24,7 @@
             margin: 0;
             padding: 0;
             background-image: url(https://img.freepik.com/fotos-gratis/comida-deliciosa-na-vista-superior-da-placa-de-madeira_23-2148859604.jpg?w=1380&t=st=1697932999~exp=1697933599~hmac=0897a604e5862b265c652b5fc9f0ab7eced7deadec987bce91bb4764b2f87865);
+            /* https://img.freepik.com/fotos-premium/empanadillas-de-abobora-isoladas-em-fundo-branco_123827-18950.jpg?w=1060 */
             background-size: cover;
             background-repeat: no-repeat; 
             background-attachment: fixed;
@@ -49,12 +50,23 @@
             transform: translateY(-50%);
         }
 
+        welcome-container {
+            text-align: left;
+            position: absolute;
+            top: 10px;
+            left: 10px; 
+        }
+
         h1 {
             font-size: 36px;
         }
 
         button {
             font-size: 24px;
+        }
+        b {
+            font-size: 36px;
+            color: #d68741;
         }
     </style>
 </head>
@@ -67,27 +79,35 @@
     {% block title %}{% endblock %}
 
     {% block content %}
-    <!-- <h1>HOME</h1>
-    <p class="important">Seja bem vindo!</p>
-
-    <ul>
-        <li><a href="{{ url_for('index.formIndex') }}">Home</a></li>
-    </ul>  -->
+    <div class="welcome-container " style="color: #ff0000; font-size: 18px;"></div>
+        {% if 'login' in session %}
+            <b> ~Bem-vindo(a) {{ session['login'] }}!</b>
+        {% endif %}
+    </div>
     <div class="background-image"></div>
     <div class="content-container">
-        <h1>Home</h1>
-        <form action="{{ url_for('index.formIndex') }}" method="POST">
-            <button style="background-color: #c6ebcc; color: #499146; font-size: 18px; padding: 10px 10px; border: 3px solid #5aa358; border-radius: 5px; cursor: pointer;" type="submit" name="formNovo" class="bi bi-house-add">  Novo Home</button>
-            <!-- <button class="bi bi-person-plus" style="background-color: #b7e6bf; color: #499146; font-size: 18px; padding: 10px 20px; border: 3px solid #5aa358; border-radius: 5px; cursor: pointer;" class="form-novo-funcionario" type="submit" name="formNovo">  Novo Funcionário</button> -->
+        <h1 style="color: #d68741">Home</h1>
+        <form action="{{ url_for('login.login') }}" method="POST">
+            <button style="background-color: #c6ebcc; color: #499146; font-size: 18px; padding: 10px 10px; border: 3px solid #5aa358; border-radius: 5px; cursor: pointer;" type="submit" name="formNovo" class="bi bi-house-add">  Novo Login</button>
         </form>  
         </div>
     {% endblock %}
 
-</body>
+</body>""
 
 </html>
 
 
 
-2- Escolher como quer que fique as caixas de texto dos novo funcionário/cliente etc, (talvez tentar de novo em pé).
-3- Checar os slides do começo e continuar, consertando os erros.
+
+
+
+
+
+
+
+
+
+
+
+

@@ -2,6 +2,8 @@ from flask import Blueprint, render_template, request, redirect, url_for, jsonif
 import requests
 from settings import HEADERS_API, ENDPOINT_FUNCIONARIO
 from funcoes import Funcoes
+from mod_login.login import validaSessao
+
 
 bp_funcionario = Blueprint('funcionario', __name__, url_prefix="/funcionario", template_folder='templates')
 
@@ -18,10 +20,6 @@ def formListaFuncionario():
         return render_template('formListaFuncionario.html', result=result[0])
     except Exception as e:
         return render_template('formListaFuncionario.html', msgErro=e.args[0])
-
-@bp_funcionario.route('/form-funcionario/', methods=['POST'])
-def formFuncionario():
-    return render_template('formFuncionario.html')
 
 @bp_funcionario.route('/insert', methods=['POST'])
 def insert():
@@ -120,7 +118,22 @@ def delete():
     except Exception as e:
         # return render_template('formListaFuncionario.html', msgErro=e.args[0])
         return jsonify(erro=True, msgErro=e.args[0])
+    
+@bp_funcionario.route('/form-funcionario/', methods=['POST'])
+@validaSessao
+def formFuncionario():
+    return render_template('formFuncionario.html')
 
+''' rotas para PDF '''
+from mod_funcionario.GeraPdfFuncionario import PDF
+from flask import send_file
+
+@bp_funcionario.route('/pdfTodos', methods=['GET','POST'])
+@validaSessao
+def pdfTodos():
+    geraPdf = PDF()
+    geraPdf.listaTodos()
+    return send_file('pdfFuncionarios.pdf')
 
 
 # @bp_funcionario.route('/inserir_funcionario', methods=['POST'])

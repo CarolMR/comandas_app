@@ -24,10 +24,14 @@
             text-align: center;
             margin-top: 10px;   
         }
+        .form-pdf{
+            text-align: right;
+            margin-top: 10px; 
+        }
     </style>
 </head>
 
-<body style="background-color: #f3efdb;">
+<body style="background-color:#f3efdb;">
 
     {% extends "base.html" %}
     
@@ -40,11 +44,14 @@
         <form class="form-title" action="{{ url_for('produto.formProduto') }}" method="POST">
             <h1 style="color: #d68741"><i class="bi bi-arrow-right-short"></i>Produtos</h1>
         </form>
-    
+
         <form class="form-produto" action="{{ url_for('produto.formProduto') }}" method="POST">
             <button class="bi bi-cart-plus" style="background-color: #b7e6bf; color: #499146; font-size: 18px; padding: 10px 20px; border: 3px solid #5aa358; border-radius: 5px; cursor: pointer;" class="form-novo-produto" type="submit" name="formNovo">  Novo Produto</button>
         </form>
     </div>
+    <form action="{{ url_for('produto.pdfTodos') }}" method="POST" class="form-pdf">
+        <button target="_blank" href="{{ url_for('produto.pdfTodos') }}" class="bi bi-filetype-pdf" style="background-color:#b7e6bf; color: #499146; font-size: 16px; padding: 10px 20px; border: 3px solid #5aa358; border-radius: 5px; cursor: pointer;">PDF</button>
+    </form>
     
     <div class="container text-center">
         <div class="row align-items-center">
@@ -58,7 +65,7 @@
                         <th scope="col">Valor Unitário</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="table-group-divider">
                     <tr>
                         <th scope="row"></th>
                         <td>...</td>
@@ -84,7 +91,6 @@
                         <td><i class="fas fa-trash"></i></td>
                         <td>
                             <form action="{{ url_for('produto.formEditProduto') }}" method="POST" name="formEdit{{ row['id_produto'] }}">
-                            
                             <input type="hidden" name="id" value="{{ row['id_produto'] }}">
                             <button type="submit" name="formEditProduto"> <i class="bi bi-pencil-square" style="color: #499146;"></i></button>
                         
@@ -93,7 +99,7 @@
                         <td>
                             <form method='POST' name='jsDelete' id='jsDelete'>
                                 <input type='hidden' name='id_produto' value="{{ row['id_produto'] }}">
-                                <button type='submit' name='formDeleteProduto' class='btn'><i class="bi bi-trash" style="color:#5e3929;"></i></button>
+                                <button type='submit' name='formDeleteProduto' class='btn'><i class="bi bi-trash" style="font-size: 20px; color:#5e3929;"></i></button>
                             </form>
                         </td>
                     </tr>

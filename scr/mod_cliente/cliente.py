@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, jsonify
+from mod_login.login import validaSessao
 import requests
 from settings import HEADERS_API, ENDPOINT_CLIENTE
 from funcoes import Funcoes
@@ -126,3 +127,14 @@ def delete():
     except Exception as e:
         # return render_template('formListaCliente.html', msgErro=e.args[0])
         return jsonify(erro=True, msgErro=e.args[0])
+
+''' rotas para PDF '''
+from mod_cliente.GeraPdfCliente import PDF
+from flask import send_file
+
+@bp_cliente.route('/pdfTodos', methods=['GET','POST'])
+@validaSessao
+def pdfTodos():
+    geraPdf = PDF()
+    geraPdf.listaTodos()
+    return send_file('pdfClientes.pdf')
